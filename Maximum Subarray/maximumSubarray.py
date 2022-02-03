@@ -51,6 +51,22 @@ def kadanes(arr):
     else:
         return max
 
+def kadanesOpt(arr):
+  if len(arr) == 1:
+      return arr[0]
+  max = arr[0]
+  currentMax = 0
+  for i in arr:
+      tempMax = currentMax + i
+      if i > tempMax:
+        currentMax = i
+      else:
+        currentMax = tempMax
+      if currentMax > max:
+          max = currentMax
+
+  return max
+
 
 nums = [-2, 0]
 print(kadanes(nums))
