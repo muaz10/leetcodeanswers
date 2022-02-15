@@ -17,19 +17,6 @@ def printInorder(root):
         printInorder(root.right)
 
 
-# A function to do postorder tree traversal
-def printPostorder(root):    
-    if root:    
-        # First recur on left child
-        printPostorder(root.left)
-
-        # the recur on right child
-        printPostorder(root.right)
-
-        # now print the data of node
-        print(root.val),
-
-
 # A function to do preorder tree traversal
 def printPreorder(root):    
     if root:    
@@ -42,35 +29,45 @@ def printPreorder(root):
         # Finally recur on right child
         printPreorder(root.right)
 
-def printLevelOrder(root):
-    h = height(root)
-    for i in range(1, h+1):
-        printCurrentLevel(root, i)
-        print("\n")
 
-# Print nodes at a current level
-def printCurrentLevel(root, level):
+# A function to do postorder tree traversal
+def printPostorder(root):    
+    if root:    
+        # First recur on left child
+        printPostorder(root.left)
+
+        # the recur on right child
+        printPostorder(root.right)
+
+        # now print the data of node
+        print(root.val)
+
+def printLevelOrder(root):
+    # Base Case
     if root is None:
         return
-    if level == 1:
-        print(str(root.val) + " ")
-    elif level > 1:
-        printCurrentLevel(root.left, level-1)
-        printCurrentLevel(root.right, level-1)
 
-def height(root):
-    if root is None:
-        return 0
-    else:
-        # Compute the height of each subtree
-        lheight = height(root.left)
-        rheight = height(root.right)
+    # Create an empty queue
+    # for level order traversal
+    queue = []
  
-        # Use the larger one
-        if lheight > rheight:
-            return lheight+1
-        else:
-            return rheight+1
+    # Enqueue Root and initialize height
+    queue.append(root)
+ 
+    while(len(queue) > 0):
+ 
+        # Print front of queue and
+        # remove it from queue
+        print(queue[0].val)
+        node = queue.pop(0)
+ 
+        # Enqueue left child
+        if node.left is not None:
+            queue.append(node.left)
+ 
+        # Enqueue right child
+        if node.right is not None:
+            queue.append(node.right)
 
 p = Node(2)
 p.left = Node(1) 
